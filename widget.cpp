@@ -190,10 +190,8 @@ Widget::Widget(QWidget *parent)
             {
             //贷款总额,单位是元
             double loans = 0;
-            int flag = 1;
-            if((ui->lineEdit->text()=="")||ui->lineEdit_2->text()==""||ui->lineEdit_3->text()=="")flag =0;
 
-            if(ui->comboBox_1_2->currentIndex()==0&&flag)//根据面积、单价计算
+            if(ui->comboBox_1_2->currentIndex()==0)//根据面积、单价计算
             {
                 //房屋面积
                 double area = (ui->lineEdit_3->text()).toDouble();
