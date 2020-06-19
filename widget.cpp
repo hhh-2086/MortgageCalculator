@@ -184,8 +184,8 @@ Widget::Widget(QWidget *parent)
         ui->textBrowser->clear();//清空以前的内容
 
         if(ui->stackedWidget->currentIndex()==0)//商业贷款或公积金贷款
-        {if((ui->lineEdit->text()).isEmpty())
-                ui->textBrowser->append("您未输入利率！");
+        {if((ui->lineEdit->text()).toDouble()==0)
+                ui->textBrowser->append("利率不能为0");
             else
             {
             //贷款总额,单位是元
@@ -221,9 +221,8 @@ Widget::Widget(QWidget *parent)
             int month = (ui->comboBox_1_7->currentIndex()+1)*12;
 
             //利率：
-            double rate_mon ;//此处不用区别商业贷款和公积金贷款
-            if(loans==0)rate_mon =1;
-            else  rate_mon= (ui->lineEdit->text().toDouble())*0.01/12;
+            double rate_mon ;//此处不用区别商业贷款和公积金贷
+            rate_mon= (ui->lineEdit->text().toDouble())*0.01/12;
 
             //区分等额本息和等额本金:
 
@@ -263,18 +262,18 @@ Widget::Widget(QWidget *parent)
     }
 
         else//组合型贷款
-        {if((ui->lineEdit_5->text()).isEmpty()||(ui->lineEdit_7->text()).isEmpty())
-                ui->textBrowser->append("您未输入利率！");
+        {if((ui->lineEdit_5->text()).toDouble()==0||(ui->lineEdit_7->text()).toDouble()==0)
+                ui->textBrowser->append("利率不能为0");
          else
         {//对应相关信息
            //商业贷款额
          double loans1 = ((ui->lineEdit_4->text()).toDouble())*10000;
          //商业利率
-         double rate1_month = loans1==0? 1:( (ui->lineEdit_5->text()).toDouble())*0.01/12;
+         double rate1_month = ( (ui->lineEdit_5->text()).toDouble())*0.01/12;
          //公积金贷款额
          double loans2 = ((ui->lineEdit_6->text()).toDouble())*10000;
          //公积金利率
-         double rate2_month =loans2==0? 1:( (ui->lineEdit_7->text()).toDouble())*0.01/12;
+         double rate2_month =( (ui->lineEdit_7->text()).toDouble())*0.01/12;
          //按揭年数
         int month = (ui->comboBox_3->currentIndex()+1)*12;
 
